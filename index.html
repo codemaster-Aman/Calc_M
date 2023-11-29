@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator project</title>
+
+    <style type="text/css">
+        table {
+            margin: auto;
+            width: 500 px;
+            background-color: #ccc;
+        }
+
+        table button {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            color: white;
+            border-radius: 40px;
+        }
+
+        table tr td {
+            padding: 10px;
+        }
+
+        table input {
+            width: 95%;
+            height:50%;
+            text-align: right;
+            scroll-padding-block: 30px;;
+    
+        }
+    </style>
+    <!-- we are calling parameterized fun storedata and sending value for showing in calci input typw -->
+    <script type="text/javascript">
+
+        function storedata(v) {
+            var txtInput = document.getElementById('txtInput'); //accesing the input value..
+            var oldvalue = txtInput.value; //old value ko score karni padegi..
+            var t = oldvalue.length;//length nikal lenge 
+            var lastchr = oldvalue[t - 1];
+            // txtInput.value=oldvalue+v; //+ will works as concating
+            var oprSys = ["+", "-", "*", "/", "."];
+
+            if (oprSys.includes(v)) {
+                if (oprSys.includes(lastchr)) {
+                    var removelast = oldvalue.slice(0, -1); //slice will delete last operator
+                    txtInput.value = removelast + v;
+                }
+                else {
+                    txtInput.value = oldvalue + v;
+                }
+            }
+            else {
+                txtInput.value = oldvalue + v;
+            }
+        }
+        //Now we will calculat the given data easily ...
+        function calldata() {
+            var txtInput = document.getElementById('txtInput');
+            var oldvalue = eval(txtInput.value);
+            txtInput.value = oldvalue;
+
+        }
+        // clearing the data 
+        function clsdata() {
+            document.getElementById('txtInput').value = ' ';
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <td><button onclick="clsdata()"> C</button> </td>
+            <td colspan="3"> <input type="text" id="txtInput" /></td>
+        </tr>
+        <tr>
+            <td><button onclick="storedata('+')">+</button></td>
+            <td><button onclick="storedata(1)">1</button></td>
+            <td><button onclick="storedata(2)">2</button></td>
+            <td><button onclick="storedata(3)">3</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="storedata('-')">-</button></td>
+            <td><button onclick="storedata(4)">4</button></td>
+            <td><button onclick="storedata(5)">5</button></td>
+            <td><button onclick="storedata(6)">6</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="storedata('*')">*</button></td>
+            <td><button onclick="storedata(7)">7</button></td>
+            <td><button onclick="storedata(8)">8</button></td>
+            <td><button onclick="storedata(9)">9</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="storedata('/')">/</button></td>
+            <td><button onclick="storedata('.')">.</button></td>
+            <td><button onclick="storedata(0)">0</button></td>
+            <td><button onclick="calldata()">=</button></td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
